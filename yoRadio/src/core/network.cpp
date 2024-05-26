@@ -113,10 +113,11 @@ bool Network::wifiBegin(bool silent){
   WiFi.mode(WIFI_STA);
   while (true) {
     if(!silent){
-      Serial.printf("##[BOOT]#\tAttempt to connect to %s\n", config.ssids[ls].ssid);
+      Serial.printf("##[BOOT]#\tAttempt to connect to %s:%s\n", config.ssids[ls].ssid, config.ssids[ls].password);
       Serial.print("##[BOOT]#\t");
       display.putRequest(BOOTSTRING, ls);
     }
+    
     WiFi.begin(config.ssids[ls].ssid, config.ssids[ls].password);
     while (WiFi.status() != WL_CONNECTED) {
       if(!silent) Serial.print(".");

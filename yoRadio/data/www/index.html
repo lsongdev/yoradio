@@ -79,7 +79,7 @@
       </div><!--player-->
       <div id="pleditorwrap" class="hidden">
         <div id="pleditor">
-          <h2>Playlist Editor<span onclick="showEditor()"></span></h2>
+          <h2 data-i18n>Playlist Editor<span onclick="showEditor()"></span></h2>
           <div id="pleheader"><span class="space"><input type="checkbox" onclick="selectAll(this)" /></span><span class="plename">Name</span><span class="pleurl">URL</span><span class="pleovol">Ovol</span></div>
           <ol id="pleditorcontent">
             <li class="pleitem">
@@ -90,11 +90,11 @@
             </li>
           </ol><!--pleditorcontent-->
           <div class="formbuttons">
-            <label for="file-upload" class="button" data-name="plimport">Import</label><input id="file-upload" type="file" accept=".txt, .csv" onchange="doPlUpload(this)" hidden/>
-            <div class="button" data-name="plexport">Export</div>
-            <div class="button" data-name="pladd">Add</div>
-            <div class="button" data-name="pldel">Remove</div>
-            <div class="button" data-name="plsubmit">Save</div>
+            <label for="file-upload" class="button" data-name="plimport" data-i18n>Import</label><input id="file-upload" type="file" accept=".txt, .csv" onchange="doPlUpload(this)" hidden/>
+            <div class="button" data-name="plexport" data-i18n>Export</div>
+            <div class="button" data-name="pladd" data-i18n>Add</div>
+            <div class="button" data-name="pldel" data-i18n>Remove</div>
+            <div class="button" data-name="plsubmit" data-i18n>Save</div>
           </div>
         </div><!--pleditor-->
       </div><!--pleditorwrap-->
@@ -103,5 +103,6 @@
   </div>
   <script src="script.js?%VERSION%"></script>
   <script src="dragpl.js?%VERSION%"></script>
+  <script src="i18n.js?%VERSION%"></script>
 </body>
 </html>

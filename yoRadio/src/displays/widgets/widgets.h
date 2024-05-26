@@ -176,6 +176,37 @@ class ScrollWidget: public TextWidget {
     void _reset();
 };
 
+
+class ScrollWidgetCHS: public TextWidget {
+  public:
+    ScrollWidgetCHS(){}
+    ScrollWidgetCHS(const char* separator, ScrollConfig conf, uint16_t fgcolor, uint16_t bgcolor);
+    ~ScrollWidgetCHS();
+    void init(const char* separator, ScrollConfig conf, uint16_t fgcolor, uint16_t bgcolor);
+    void loop();
+    void setText(const char* txt);
+    void setText(const char* txt, const char *format);
+  private:
+    char *_sep;
+    char *_window;
+    int16_t _x;
+    bool _doscroll;
+    uint8_t _scrolldelta;
+    uint16_t _scrolltime;
+    uint32_t _scrolldelay;
+    uint16_t _sepwidth, _startscrolldelay;
+    uint8_t _charWidth;
+  private:
+    void _setTextParams();
+    void _calcX();
+    void _drawFrame();
+    void _draw();
+    bool _checkIsScrollNeeded();
+    bool _checkDelay(int m, uint32_t &tstamp);
+    void _clear();
+    void _reset();
+};
+
 class SliderWidget: public Widget {
   public:
     SliderWidget(){}

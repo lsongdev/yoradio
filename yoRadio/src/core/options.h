@@ -9,14 +9,14 @@ ALL YOUR SETTINGS WILL BE OVERWRITTEN DURING THE UPDATE.
 STORE YOUR SETTINGS IN THE *** myoptions.h *** FILE.
 ********************************************************/
 
-#if __has_include("../../myoptions.h")
-  #include "../../myoptions.h"        /* <- write your variable values here */
+#if __has_include("../myoptions.h")
+  #include "../myoptions.h"        /* <- write your variable values here */
 #endif
-#if __has_include("../../mytheme.h")
-  #include "../../mytheme.h"            /* <- Theme file */
+#if __has_include("../mytheme.h")
+  #include "../mytheme.h"            /* <- Theme file */
 #endif
-#if __has_include("../../mqttoptions.h")
-  #include "../../mqttoptions.h"
+#if __has_include("../mqttoptions.h")
+  #include "../mqttoptions.h"
 #endif
 /*******************************************************
 

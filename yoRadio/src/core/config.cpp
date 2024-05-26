@@ -10,7 +10,7 @@
 Config config;
 
 #if DSP_HSPI || TS_HSPI || VS_HSPI
-SPIClass  SPI2(HSPI);
+SPIClass  SPI2(VSPI);
 #endif
 #if defined(SD_SPIPINS) || SD_HSPI
 SPIClass  SDSPI(HSPI);
@@ -34,6 +34,7 @@ bool Config::_isFSempty() {
 
 void Config::init() {
   EEPROM.begin(EEPROM_SIZE);
+  SPI2.begin(18, -1, 19, 22);
   sdog.begin();
   bootInfo();
 #if RTCSUPPORTED
@@ -423,14 +424,14 @@ void Config::setDefaults() {
   store.lastSSID = 0;
   store.audioinfo = false;
   store.smartstart = 2;
-  store.tzHour = 3;
+  store.tzHour = 8;
   store.tzMin = 0;
   store.timezoneOffset = 0;
 
   store.vumeter=false;
   store.softapdelay=0;
-  store.flipscreen=false;
-  store.invertdisplay=false;
+  store.flipscreen=true;
+  store.invertdisplay=true;
   store.numplaylist=false;
   store.fliptouch=false;
   store.dbgtouch=false;

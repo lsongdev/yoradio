@@ -5,6 +5,7 @@
 #include "Arduino.h"
 #include <Adafruit_GFX.h>
 #include <Adafruit_ST7789.h>
+#include <U8g2_for_Adafruit_GFX.h>
 
 #if CLOCKFONT_MONO
   #include "fonts/DS_DIGI42pt7b_mono.h"        // https://tchapi.github.io/Adafruit-GFX-Font-Customiser/
@@ -39,5 +40,5 @@ class DspCore: public Adafruit_ST7789 {
 };
 
 extern DspCore dsp;
-
+extern U8G2_FOR_ADAFRUIT_GFX u8g2_for_adafruit_gfx;
 #endif
