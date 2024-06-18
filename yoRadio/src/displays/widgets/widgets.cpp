@@ -72,6 +72,13 @@ void TextWidget::setText(int val, const char *format)
   setText(buf);
 }
 
+void TextWidget::setText(float val, const char *format)
+{
+  char buf[_buffsize];
+  snprintf(buf, _buffsize, format, val);
+  setText(buf);
+}
+
 void TextWidget::setText(const char *txt, const char *format)
 {
   char buf[_buffsize];

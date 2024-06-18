@@ -122,6 +122,7 @@ class TextWidget: public Widget {
     void init(WidgetConfig wconf, uint16_t buffsize, bool uppercase, uint16_t fgcolor, uint16_t bgcolor);
     void setText(const char* txt);
     void setText(int val, const char *format);
+    void setText(float val, const char *format);
     void setText(const char* txt, const char *format);
     bool uppercase() { return _uppercase; }
   protected:

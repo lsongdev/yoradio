@@ -140,9 +140,10 @@ void Display::_buildPager()
 #endif
 #ifndef HIDE_VOL
   _voltxt = new TextWidget(voltxtConf, 10, false, config.theme.vol, config.theme.background);
+  _batt = new TextWidget(battConf, 10, false, config.theme.vol, config.theme.background);
 #endif
 #ifndef HIDE_IP
-  _volip = new TextWidget(iptxtConf, 30, false, config.theme.ip, config.theme.background);
+  _ip = new TextWidget(iptxtConf, 30, false, config.theme.ip, config.theme.background);
 #endif
 #ifndef HIDE_RSSI
   _rssi = new TextWidget(rssiConf, 20, false, config.theme.rssi, config.theme.background);
@@ -156,8 +157,9 @@ void Display::_buildPager()
     _footer.addWidget(_volbar);
   if (_voltxt)
     _footer.addWidget(_voltxt);
-  if (_volip)
-    _footer.addWidget(_volip);
+    _footer.addWidget(_batt);
+  if (_ip)
+    _footer.addWidget(_ip);
   if (_rssi)
     _footer.addWidget(_rssi);
   if (_heapbar)
@@ -274,8 +276,8 @@ void Display::_start()
   if (_rssi)
     _setRSSI(WiFi.RSSI());
 #ifndef HIDE_IP
-  if (_volip)
-    _volip->setText(WiFi.localIP().toString().c_str(), iptxtFmt);
+  if (_ip)
+    _ip->setText(WiFi.localIP().toString().c_str(), iptxtFmt);
 #endif
   _pager.setPage(pages[PG_PLAYER]);
   _volume();
@@ -517,8 +519,8 @@ void Display::loop()
       if (!config.store.showweather)
       {
 #ifndef HIDE_IP
-        if (_volip)
-          _volip->setText(WiFi.localIP().toString().c_str(), iptxtFmt);
+        if (_ip)
+          _ip->setText(WiFi.localIP().toString().c_str(), iptxtFmt);
 #endif
       }
       else
@@ -577,8 +579,8 @@ void Display::loop()
     case NEWIP:
     {
 #ifndef HIDE_IP
-      if (_volip)
-        _volip->setText(WiFi.localIP().toString().c_str(), iptxtFmt);
+      if (_ip)
+        _ip->setText(WiFi.localIP().toString().c_str(), iptxtFmt);
 #endif
       break;
     }
@@ -591,25 +593,13 @@ void Display::loop()
 
 void Display::_setRSSI(int rssi)
 {
-  if (!_rssi)
-    return;
-#if RSSI_DIGIT
+  if (!_rssi) return;
   _rssi->setText(rssi, rssiFmt);
-  return;
+  #ifdef BATT_ADC
+  float voltage = GetBATVoltage();
+  _batt->setText(voltage, battFmt);
 #endif
-  char rssiG[3];
-  int rssi_steps[] = {RSSI_STEPS};
-  if (rssi >= rssi_steps[0])
-    strlcpy(rssiG, "\004\006", 3);
-  if (rssi >= rssi_steps[1] && rssi < rssi_steps[0])
-    strlcpy(rssiG, "\004\005", 3);
-  if (rssi >= rssi_steps[2] && rssi < rssi_steps[1])
-    strlcpy(rssiG, "\004\002", 3);
-  if (rssi >= rssi_steps[3] && rssi < rssi_steps[2])
-    strlcpy(rssiG, "\003\002", 3);
-  if (rssi < rssi_steps[3] || rssi >= 0)
-    strlcpy(rssiG, "\001\002", 3);
-  _rssi->setText(rssiG);
+  return;
 }
 
 void Display::_station()

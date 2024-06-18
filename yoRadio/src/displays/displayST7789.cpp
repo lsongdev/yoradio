@@ -8,11 +8,6 @@
 #include "../core/config.h"
 #include "../core/network.h"
 
-#ifdef BATT_ADC
-float GetBATVoltage();
-
-#endif
-
 #ifndef DEF_SPI_FREQ
 #define DEF_SPI_FREQ 40000000UL /*  set it to 0 for system default */
 #endif
@@ -134,22 +129,11 @@ void DspCore::_clockSeconds()
 {
   setTextSize(3);
   setTextColor(config.theme.seconds, config.theme.background);
-  setCursor(width() - 8 - clockRightSpace - CHARWIDTH * 3 * 2, clockTop - clockTimeHeight + 1);
   sprintf(_bufforseconds, "%02d", network.timeinfo.tm_sec);
-  print(_bufforseconds); /* print seconds */
-#ifdef BATT_ADC
-  float voltage = GetBATVoltage();
-  setTextSize(3);
-  setTextColor(config.theme.seconds, config.theme.background);
-  setCursor(width() - 8 - clockRightSpace - CHARWIDTH * 8 * 2 + 6, clockTop - clockTimeHeight - 24 + 1);
-  sprintf(_bufforseconds, "%02.2fV", voltage);
-  print(_bufforseconds); /* print seconds */
-#endif
   setTextSize(1);
   setFont(&DS_DIGI42pt7b);
   setTextColor((network.timeinfo.tm_sec % 2 == 0) ? config.theme.clock : (CLOCKFONT_MONO ? config.theme.clockbg : config.theme.background), config.theme.background);
   setCursor(_timeleft + _dotsLeft, clockTop);
-  print(":"); /* print dots */
   setFont();
 }
 
