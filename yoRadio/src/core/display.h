@@ -8,6 +8,10 @@
 
 #include "../displays/dspcore.h"
 
+#ifdef BATT_ADC
+float GetBATVoltage();
+#endif
+
 enum displayMode_e
 {
   PLAYER,
@@ -111,7 +115,7 @@ private:
   ProgressWidget _testprogress;
   ClockWidget _clock;
   Page *_boot;
-  TextWidget *_bootstring, *_volip, *_voltxt, *_rssi, *_bitrate;
+  TextWidget *_bootstring, *_ip, *_batt, *_voltxt, *_rssi, *_bitrate;
   Ticker _returnTicker;
   uint8_t _bootStep;
   void _time(bool redraw = false);
